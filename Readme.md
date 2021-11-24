@@ -1,6 +1,6 @@
 # Проект «Киноман»
 
-* Студент: [Алексей Гомелевский](https://up.htmlacademy.ru/ecmascript/16/user/1918919).
+* Студент: [Алексей Гомелевский](https://htmlacademy.ru/profile/id1918919).
 * Наставник: [Артем Рудов](https://htmlacademy.ru/profile/artrudov).
 
 ---
