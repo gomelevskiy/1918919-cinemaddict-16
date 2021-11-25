@@ -3,7 +3,7 @@ import { createNavigationTemplate } from './view/navigation-view';
 import { createProfileTemplate } from './view/profile-view';
 import { createSortTemplate } from './view/sort-view';
 import { createListingTemplate } from './view/listing-view';
-import { createCardTemplate } from './card-view';
+import { createCardTemplate } from './view/card-view';
 import { createShowMoreTemplate } from './view/show-more-view';
 import { createTopRatedListingTemplate } from './view/top-rated-list-view';
 import { createMostCommentedTemplate } from './view/most-commented-list-view';
