@@ -1,4 +1,4 @@
-import { COUNT_CARD, RENDER_POSITION } from './consts';
+import {COUNT_CARD, RENDER_POSITION} from './consts';
 import {renderTemplate} from './render';
 import {createNavigationTemplate} from './view/navigation-view';
 import {createProfileTemplate} from './view/profile-view';
