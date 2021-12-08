@@ -1,5 +1,5 @@
-import { RENDER_POSITION } from './consts';
+import { RenderPosition } from './consts';
 
-export const renderTemplate = (container, template, position = RENDER_POSITION.BEFORE_BEGIN) => {
+export const renderTemplate = (container, template, position = RenderPosition.BEFORE_BEGIN) => {
   container.insertAdjacentHTML(position, template);
 };
