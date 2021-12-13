@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { FORMAT_DATE } from './consts';
+import {FORMAT_DATE} from './consts';
 
 export const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -17,21 +17,12 @@ export const generateRandomValue = (value = null) => {
 export const getRandomDecimal = (min = 0, max = 1) => (Math.round((Math.random() * (max - min) + min) * 10) / 10).toFixed(1);
 
 export const textCropper = (text, limit) => {
-  if (text.length >= limit) {
-    return `${text.substring(0,limit).trimEnd()}...`;
-  } else {
-    return text;
-  }
+  text.length >= limit ? `${text.substring(0,limit).trimEnd()}...` : text;
 };
 
 export const commentCountRules = (comments) => {
   const commentsCount = comments.length;
-
-  if (commentsCount === 1) {
-    return `${commentsCount} comment`;
-  } else {
-    return `${commentsCount} comments`;
-  }
+  commentsCount === 1 ? `${commentsCount} comment` : `${commentsCount} comments`;
 };
 
 export const generateYear = (date) => dayjs(date).year();

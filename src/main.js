@@ -1,8 +1,4 @@
-import {
-  COUNT_CARD,
-  COUNT_CARD_PER_STEP,
-  RenderPosition
-} from './consts';
+import {COUNT_CARD, COUNT_CARD_PER_STEP, RenderPosition} from './consts';
 import {renderTemplate} from './render';
 import {createNavigationTemplate} from './view/navigation-view';
 import {createProfileTemplate} from './view/profile-view';

@@ -15,9 +15,7 @@ import {
   getRandomDecimal,
   generateRandomValue
 } from '../utils';
-import {
-  commentTemplate
-} from './comments';
+import {commentTemplate} from './comments';
 import dayjs from 'dayjs';
 
 const generateDescription = () => {

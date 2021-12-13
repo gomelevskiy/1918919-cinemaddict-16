@@ -1,9 +1,5 @@
-import {
-  formatDate
-} from '../utils';
-import {
-  commentsTemplate
-} from './comments-view';
+import {formatDate} from '../utils';
+import {createCommentsTemplate} from './comments-view';
 
 export const createPopupTemplate = ({
   article,
@@ -122,7 +118,7 @@ export const createPopupTemplate = ({
         </section>
       </div>
       <div class="film-details__bottom-container">
-        ${commentsTemplate(comments)}
+        ${createCommentsTemplate(comments)}
       </div>
     </form>
   </section>`);
