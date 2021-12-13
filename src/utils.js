@@ -15,15 +15,7 @@ export const generateRandomValue = (value = null) => {
 };
 
 export const getRandomDecimal = (min = 0, max = 1) => (Math.round((Math.random() * (max - min) + min) * 10) / 10).toFixed(1);
-
-export const textCropper = (text, limit) => {
-  text.length >= limit ? `${text.substring(0,limit).trimEnd()}...` : text;
-};
-
-export const commentCountRules = (comments) => {
-  const commentsCount = comments.length;
-  commentsCount === 1 ? `${commentsCount} comment` : `${commentsCount} comments`;
-};
-
+export const textCropper = (text, limit) => (text.length >= limit ? `${text.substring(0,limit).trimEnd()}...` : text);
+export const commentCountRules = (comments) => (comments.length === 1 ? `${comments.length} comment` : `${comments.length} comments`);
 export const generateYear = (date) => dayjs(date).year();
 export const formatDate = (date) => dayjs(date).format(FORMAT_DATE);

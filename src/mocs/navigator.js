@@ -11,7 +11,7 @@ export const generateFilter = (films) => {
     if (film.isFavourite) {
       prev.favourite += 1;
     }
-  
+
     return prev;
   }, {
     watched: 0,
