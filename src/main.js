@@ -1,20 +1,26 @@
-import { COUNT_CARD, COUNT_CARD_PER_STEP, RenderPosition } from './consts';
-import { renderTemplate } from './render';
-import { createNavigationTemplate } from './view/navigation-view';
-import { createProfileTemplate } from './view/profile-view';
-import { createSortTemplate } from './view/sort-view';
-import { createListingTemplate } from './view/listing-view';
-import { createCardTemplate}  from './view/card-view';
-import { createShowMoreTemplate } from './view/show-more-view';
-import { createStatisticsCountTemplate } from './view/statistics-count-view';
-import { createPopupTemplate } from './view/popup-more';
-import { generateFilm } from './mocs/film';
-import { generateFilter } from './mocs/navigator';
+import {
+  COUNT_CARD,
+  COUNT_CARD_PER_STEP,
+  RenderPosition
+} from './consts';
+import {renderTemplate} from './render';
+import {createNavigationTemplate} from './view/navigation-view';
+import {createProfileTemplate} from './view/profile-view';
+import {createSortTemplate} from './view/sort-view';
+import {createListingTemplate} from './view/listing-view';
+import {createCardTemplate} from './view/card-view';
+import {createShowMoreTemplate} from './view/show-more-view';
+import {createStatisticsCountTemplate} from './view/statistics-count-view';
+import {createPopupTemplate} from './view/popup-more';
+import generateFilm from './mocs/film';
+import {generateFilter} from './mocs/navigator';
 
 const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
 
-const FILMS = Array.from({length: COUNT_CARD}, generateFilm);
+const FILMS = Array.from({
+  length: COUNT_CARD
+}, generateFilm);
 const filters = generateFilter(FILMS);
 
 renderTemplate(siteMainElement, createNavigationTemplate(filters), RenderPosition.AFTER_BEGIN);

@@ -1,36 +1,39 @@
-import dayjs from 'dayjs';
+import {
+  formatDate
+} from '../utils';
+import {
+  commentsTemplate
+} from './comments-view';
 
-export const createPopupTemplate = (film) => {
-  const {
-    article,
-    poster,
-    description,
-    rating,
-    dateRelise,
-    country,
-    director,
-    actors,
-    ageRationg,
-    screenwriters,
-    duration,
-    category,
-    comments,
-    isWatched,
-    isWatchList,
-    isFavourite
-  } = film;
+export const createPopupTemplate = ({
+  article,
+  poster,
+  description,
+  rating,
+  dateRelise,
+  country,
+  director,
+  actors,
+  ageRationg,
+  screenwriters,
+  duration,
+  genre,
+  comments,
+  isWatched,
+  isWatchList,
+  isFavourite
+}) => {
+  const genreTemplate = (categories) => {
+    const genres = [];
 
-  const dateRelisePopup = () => {
-    const dateReliseFilm = dayjs(dateRelise).format('DD MMMM YYYY');
+    for (const category of categories) {
+      genres.push(`<span class="film-details__genre">${category}</span>`);
+    }
 
-    return dateReliseFilm;
+    return genres;
   };
 
-  const actorsList = Array.from(actors);
-  const screenwritersList = Array.from(screenwriters);
-  const directorItem = Array.from(director)[0];
-
-  return `<section class="film-details">
+  return (`<section class="film-details">
     <form class="film-details__inner" action="" method="get">
       <div class="film-details__top-container">
         <div class="film-details__close">
@@ -55,19 +58,19 @@ export const createPopupTemplate = (film) => {
               <table class="film-details__table">
                 <tr class="film-details__row">
                   <td class="film-details__term">Director</td>
-                  <td class="film-details__cell">${directorItem}</td>
+                  <td class="film-details__cell">${director[0]}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Writers</td>
-                  <td class="film-details__cell">${screenwritersList}</td>
+                  <td class="film-details__cell">${screenwriters.join(', ')}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Actors</td>
-                  <td class="film-details__cell">${actorsList}</td>
+                  <td class="film-details__cell">${actors.join(', ')}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Release Date</td>
-                  <td class="film-details__cell">${dateRelisePopup()}</td>
+                  <td class="film-details__cell">${formatDate(dateRelise)}</td>
                 </tr>
                 <tr class="film-details__row">
                   <td class="film-details__term">Runtime</td>
@@ -80,7 +83,7 @@ export const createPopupTemplate = (film) => {
                 <tr class="film-details__row">
                   <td class="film-details__term">Genres</td>
                   <td class="film-details__cell">
-                    ${Object.entries(category).map(([count, categoryItem]) => `<span class="film-details__genre" data-item="${count}">${categoryItem}</span>`).join('')}
+                    ${genreTemplate(genre).join('')}
                   </td>
                 </tr>
               </table>
@@ -119,54 +122,8 @@ export const createPopupTemplate = (film) => {
         </section>
       </div>
       <div class="film-details__bottom-container">
-        <section class="film-details__comments-wrap">
-          <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${Object.keys(comments).length}</span></h3>
-          <ul class="film-details__comments-list">
-          ${Object.entries(comments).map(([count, comment]) => `
-            <li class="film-details__comment" data-index="${count}">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/${comment.emotionsComment}.png" width="55" height="55" alt="emoji-${comment.emotionsComment}">
-            </span>
-            <div>
-              <p class="film-details__comment-text">${comment.textComments}</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">${comment.authorComment}</span>
-                <span class="film-details__comment-day">${comment.date}</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          `).join('')}
-          </ul>
-          <div class="film-details__new-comment">
-            <div class="film-details__add-emoji-label"></div>
-            <label class="film-details__comment-label">
-              <textarea class="film-details__comment-input" placeholder="Select reaction below and write comment here" name="comment"></textarea>
-            </label>
-            <div class="film-details__emoji-list">
-              <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-smile" value="smile">
-              <label class="film-details__emoji-label" for="emoji-smile">
-                  <img src="./images/emoji/smile.png" width="30" height="30" alt="emoji">
-              </label>
-
-              <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-sleeping" value="sleeping">
-              <label class="film-details__emoji-label" for="emoji-sleeping">
-                <img src="./images/emoji/sleeping.png" width="30" height="30" alt="emoji">
-              </label>
-
-              <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-puke" value="puke">
-              <label class="film-details__emoji-label" for="emoji-puke">
-                <img src="./images/emoji/puke.png" width="30" height="30" alt="emoji">
-              </label>
-
-              <input class="film-details__emoji-item visually-hidden" name="comment-emoji" type="radio" id="emoji-angry" value="angry">
-              <label class="film-details__emoji-label" for="emoji-angry">
-                <img src="./images/emoji/angry.png" width="30" height="30" alt="emoji">
-              </label>
-            </div>
-          </div>
-        </section>
+        ${commentsTemplate(comments)}
       </div>
     </form>
-  </section>`;
+  </section>`);
 };
