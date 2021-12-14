@@ -12,7 +12,6 @@ import dayjs from 'dayjs';
 let idComment = 0;
 
 const generateComment = () => {
-
   const comment = {
     id: String(idComment++),
     comment: TEXT_COMMENTS[getRandomInteger(0, TEXT_COMMENTS.length - 1)],
@@ -31,7 +30,6 @@ const generateComment = () => {
 };
 
 export const commentTemplate = () => {
-
   const comments = [];
 
   for (let item = 0; item < getRandomInteger(MIN_COMMENTS_GAP, MAX_COMMENTS_GAP); item++) {

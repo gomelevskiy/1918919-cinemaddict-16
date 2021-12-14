@@ -19,7 +19,6 @@ import {commentTemplate} from './comments';
 import dayjs from 'dayjs';
 
 const generateDescription = () => {
-
   const description = [];
 
   for (let index = 0; index < getRandomInteger(MIN_COUNT_DESCRIPTION, MAX_COUNT_DESCRIPTION); index++) {
@@ -30,14 +29,12 @@ const generateDescription = () => {
 };
 
 const generateDateRelise = () => {
-
   const daysGap = getRandomInteger(0, MAX_DAYS_GAP);
 
   return dayjs().add(daysGap, 'day').toDate();
 };
 
 const generateDuration = () => {
-
   const durationGap = getRandomInteger(0, MAX_DURATION_GAP);
   const duration = dayjs().add(durationGap, 'minute').minute();
 
@@ -49,7 +46,6 @@ const generateDuration = () => {
 };
 
 const generateCustomPersons = () => {
-
   const person = new Set();
 
   for (let index = 0; index < getRandomInteger(1, 3); index++) {
@@ -60,7 +56,6 @@ const generateCustomPersons = () => {
 };
 
 const generateCategory = () => {
-
   const category = new Set();
 
   for (let i = 0; i < getRandomInteger(1, 3); i++) {
