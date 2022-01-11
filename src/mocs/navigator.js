@@ -19,12 +19,6 @@ export const generateFilter = (films) => {
     favourite: 0
   });
 
-  const filter = Object.entries(filterItems).map(
-    ([filterName, countFilms]) => ({
-      name: filterName,
-      count: countFilms
-    })
-  );
-
+  const filter = Object.entries(filterItems);
   return filter;
 };
