@@ -1,12 +1,12 @@
 import {COUNT_CARD, COUNT_CARD_PER_STEP, RenderPosition} from './consts';
-import {renderTemplate} from './render';
-import {createNavigationTemplate} from './view/navigation-view';
-import {createProfileTemplate} from './view/profile-view';
-import {createSortTemplate} from './view/sort-view';
-import {createListingTemplate} from './view/listing-view';
+import {renderElement, renderTemplate} from './render';
+import SiteNavigationView from './view/navigation-view';
+import SiteProfileTemplate from './view/profile-view';
+import SiteSortTemplate from './view/sort-view';
+import SiteListingTemplate from './view/listing-view';
 import {createCardTemplate} from './view/card-view';
-import {createShowMoreTemplate} from './view/show-more-view';
-import {createStatisticsCountTemplate} from './view/statistics-count-view';
+import SiteShowMoreTemplate from './view/show-more-view';
+import SiteStatisticsCountTemplate from './view/statistics-count-view';
 import {createPopupTemplate} from './view/popup-more';
 import generateFilm from './mocs/film';
 import {generateFilter} from './mocs/navigator';
@@ -19,10 +19,10 @@ const FILMS = Array.from({
 }, generateFilm);
 const filters = generateFilter(FILMS);
 
-renderTemplate(siteMainElement, createNavigationTemplate(filters), RenderPosition.AFTER_BEGIN);
-renderTemplate(siteHeaderElement, createProfileTemplate(), RenderPosition.BEFORE_END);
-renderTemplate(siteMainElement, createSortTemplate(), RenderPosition.BEFORE_END);
-renderTemplate(siteMainElement, createListingTemplate(), RenderPosition.BEFORE_END);
+renderElement(siteMainElement, new SiteNavigationView(filters).element, RenderPosition.AFTER_BEGIN);
+renderElement(siteHeaderElement, new SiteProfileTemplate().element, RenderPosition.BEFORE_END);
+renderElement(siteMainElement, new SiteSortTemplate().element, RenderPosition.BEFORE_END);
+renderElement(siteMainElement, new SiteListingTemplate().element, RenderPosition.BEFORE_END);
 
 const filmsElement = siteMainElement.querySelector('.films');
 const filmList = filmsElement.querySelector('.films-list');
@@ -35,7 +35,7 @@ for (let item = 0; item < Math.min(FILMS.length, COUNT_CARD_PER_STEP); item++) {
 if (FILMS.length > COUNT_CARD_PER_STEP) {
   let renderedFilmCount = COUNT_CARD_PER_STEP;
 
-  renderTemplate(filmList, createShowMoreTemplate(), RenderPosition.BEFORE_END);
+  renderElement(filmList, new SiteShowMoreTemplate().element, RenderPosition.BEFORE_END);
 
   const loadMoreButton = filmList.querySelector('.films-list__show-more');
 
@@ -55,5 +55,5 @@ if (FILMS.length > COUNT_CARD_PER_STEP) {
 
 const footerElement = document.querySelector('.footer');
 const footerStatisticsElement = footerElement.querySelector('.footer__statistics');
-renderTemplate(footerStatisticsElement, createStatisticsCountTemplate(FILMS.length), RenderPosition.BEFORE_END);
+renderElement(footerStatisticsElement, new SiteStatisticsCountTemplate(FILMS.length).element, RenderPosition.BEFORE_END);
 renderTemplate(siteMainElement, createPopupTemplate(FILMS[0]), RenderPosition.AFTER_END);

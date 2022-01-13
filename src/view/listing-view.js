@@ -1,4 +1,6 @@
-export const createListingTemplate = () => (
+import {createElement} from '../render';
+
+const createListingTemplate = () => (
   `<section class="films">
     <section class="films-list">
       <h2 class="films-list__title visually-hidden">All movies. Upcoming</h2>
@@ -6,3 +8,23 @@ export const createListingTemplate = () => (
     </section>
   </section>`
 );
+
+export default class SiteListingTemplate {
+  #element = null;
+
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    return this.#element;
+  }
+
+  get template() {
+    return createListingTemplate();
+  }
+
+  removeElement() {
+    this.#element = null;
+  }
+}
