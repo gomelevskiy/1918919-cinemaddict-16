@@ -1,7 +1,8 @@
 import {formatDate} from '../utils';
-import {createCommentsTemplate} from './comments-view';
+import CommentsView from './comments-view';
+import {createElement, renderElement} from '../render';
 
-export const createPopupTemplate = ({
+const createPopupTemplate = ({
   article,
   poster,
   description,
@@ -118,8 +119,34 @@ export const createPopupTemplate = ({
         </section>
       </div>
       <div class="film-details__bottom-container">
-        ${createCommentsTemplate(comments)}
+        ${new CommentsView(comments).element}
       </div>
     </form>
   </section>`);
 };
+
+export default class CardPopupView {
+  #element = null;
+  #card = null;
+
+  constructor(card) {
+    this.#card = card;
+  }
+
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    return this.#element;
+  }
+
+  get template() {
+    return createPopupTemplate(this.#card);
+  }
+
+  removeElement() {
+    this.#element = null;
+  }
+}
+

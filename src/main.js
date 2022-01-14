@@ -1,13 +1,13 @@
 import {COUNT_CARD, COUNT_CARD_PER_STEP, RenderPosition} from './consts';
-import {renderElement, renderTemplate} from './render';
+import {renderElement} from './render';
 import SiteNavigationView from './view/navigation-view';
 import SiteProfileTemplate from './view/profile-view';
 import SiteSortTemplate from './view/sort-view';
 import SiteListingTemplate from './view/listing-view';
-import {createCardTemplate} from './view/card-view';
+import CardView from './view/card-view';
 import SiteShowMoreTemplate from './view/show-more-view';
 import SiteStatisticsCountTemplate from './view/statistics-count-view';
-import {createPopupTemplate} from './view/popup-more';
+import CardPopupView from './view/popup-more';
 import generateFilm from './mocs/film';
 import {generateFilter} from './mocs/navigator';
 
@@ -29,7 +29,7 @@ const filmList = filmsElement.querySelector('.films-list');
 const filmListContainer = filmList.querySelector('.films-list__container');
 
 for (let item = 0; item < Math.min(FILMS.length, COUNT_CARD_PER_STEP); item++) {
-  renderTemplate(filmListContainer, createCardTemplate(FILMS[item]), RenderPosition.BEFORE_END);
+  renderElement(filmListContainer, new CardView(FILMS[item]).element, RenderPosition.BEFORE_END);
 }
 
 if (FILMS.length > COUNT_CARD_PER_STEP) {
@@ -43,7 +43,7 @@ if (FILMS.length > COUNT_CARD_PER_STEP) {
     evt.preventDefault();
     FILMS
       .slice(renderedFilmCount, renderedFilmCount + COUNT_CARD_PER_STEP)
-      .forEach((film) => renderTemplate(filmListContainer, createCardTemplate(film), RenderPosition.BEFORE_END));
+      .forEach((film) => renderElement(filmListContainer, new CardView(film).element, RenderPosition.BEFORE_END));
 
     renderedFilmCount += COUNT_CARD_PER_STEP;
 
@@ -56,4 +56,4 @@ if (FILMS.length > COUNT_CARD_PER_STEP) {
 const footerElement = document.querySelector('.footer');
 const footerStatisticsElement = footerElement.querySelector('.footer__statistics');
 renderElement(footerStatisticsElement, new SiteStatisticsCountTemplate(FILMS.length).element, RenderPosition.BEFORE_END);
-renderTemplate(siteMainElement, createPopupTemplate(FILMS[0]), RenderPosition.AFTER_END);
+renderElement(siteMainElement, new CardPopupView(FILMS[0]).element, RenderPosition.AFTER_END);
