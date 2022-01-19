@@ -11,6 +11,7 @@ import CardPopupView from './view/popup-more';
 import generateFilm from './mocs/film';
 import {generateFilters} from './utils';
 
+const siteBodyElement = document.querySelector('body');
 const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
 
@@ -28,8 +29,33 @@ const filmsElement = siteMainElement.querySelector('.films');
 const filmList = filmsElement.querySelector('.films-list');
 const filmListContainer = filmList.querySelector('.films-list__container');
 
+const renderFilm = (filmListElement ,film) => {
+  const filmComponent = new CardView(film);
+  const filmPopupComponent = new CardPopupView(film);
+
+  const openFilmPopup = () => {
+    siteBodyElement.classList.add('hide-overflow');
+    filmListElement.appendChild(filmPopupComponent.element, filmComponent.element);
+  };
+  
+  const closeFilmPopup = () => {
+    siteBodyElement.classList.remove('hide-overflow');
+    filmListElement.removeChild(filmPopupComponent.element, filmComponent.element);
+  };
+
+  filmComponent.element.querySelector('.film-card__link').addEventListener('click', () => {
+    openFilmPopup();
+  });
+
+  filmPopupComponent.element.querySelector('.film-details__close-btn').addEventListener('click', () => {
+    closeFilmPopup();
+  });
+
+  render(filmListElement, filmComponent.element, RenderPosition.BEFORE_END);
+}
+
 for (let item = 0; item < Math.min(FILMS.length, COUNT_CARD_PER_STEP); item++) {
-  render(filmListContainer, new CardView(FILMS[item]).element, RenderPosition.BEFORE_END);
+  renderFilm(filmListContainer, FILMS[item]);
 }
 
 if (FILMS.length > COUNT_CARD_PER_STEP) {
@@ -43,7 +69,7 @@ if (FILMS.length > COUNT_CARD_PER_STEP) {
     evt.preventDefault();
     FILMS
       .slice(renderedFilmCount, renderedFilmCount + COUNT_CARD_PER_STEP)
-      .forEach((film) => render(filmListContainer, new CardView(film).element, RenderPosition.BEFORE_END));
+      .forEach((film) => renderFilm(filmListContainer, film));
 
     renderedFilmCount += COUNT_CARD_PER_STEP;
 
