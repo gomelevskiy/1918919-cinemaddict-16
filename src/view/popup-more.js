@@ -1,6 +1,6 @@
 import {formatDate} from '../utils';
 import CommentsView from './comments-view';
-import {createElement, renderElement} from '../render';
+import {createElement} from '../render';
 
 const createPopupTemplate = ({
   article,
@@ -15,7 +15,6 @@ const createPopupTemplate = ({
   screenwriters,
   duration,
   genre,
-  comments,
   isWatched,
   isWatchList,
   isFavourite

@@ -1,6 +1,6 @@
 import {RenderPosition} from './consts';
 
-export const renderElement = (container, element, place) => {
+export const render = (container, element, place) => {
   switch (place) {
     case RenderPosition.BEFORE_BEGIN:
       container.before(element);
