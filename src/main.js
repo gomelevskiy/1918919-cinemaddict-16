@@ -9,7 +9,7 @@ import SiteShowMoreTemplate from './view/show-more-view';
 import SiteStatisticsCountTemplate from './view/statistics-count-view';
 import CardPopupView from './view/popup-more';
 import generateFilm from './mocs/film';
-import {generateFilter} from './mocs/navigator';
+import {generateFilters} from './utils';
 
 const siteMainElement = document.querySelector('.main');
 const siteHeaderElement = document.querySelector('.header');
@@ -17,7 +17,7 @@ const siteHeaderElement = document.querySelector('.header');
 const FILMS = Array.from({
   length: COUNT_CARD
 }, generateFilm);
-const filters = generateFilter(FILMS);
+const filters = generateFilters(FILMS);
 
 renderElement(siteMainElement, new SiteNavigationView(filters).element, RenderPosition.AFTER_BEGIN);
 renderElement(siteHeaderElement, new SiteProfileTemplate().element, RenderPosition.BEFORE_END);

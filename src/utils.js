@@ -19,3 +19,27 @@ export const textCropper = (text, limit) => (text.length >= limit ? `${text.subs
 export const commentCountRules = (comments) => (comments.length === 1 ? `${comments.length} comment` : `${comments.length} comments`);
 export const generateYear = (date) => dayjs(date).year();
 export const formatDate = (date) => dayjs(date).format(FORMAT_DATE);
+
+export const generateFilters = (films) => {
+  const filterItems = films.reduce((prev, film) => {
+    if (film.isWatched) {
+      prev.watched += 1;
+    }
+
+    if (film.isWatchList) {
+      prev.watchlist += 1;
+    }
+
+    if (film.isFavourite) {
+      prev.favourite += 1;
+    }
+
+    return prev;
+  }, {
+    watched: 0,
+    watchlist: 0,
+    favourite: 0
+  });
+
+  return Object.entries(filterItems);
+};

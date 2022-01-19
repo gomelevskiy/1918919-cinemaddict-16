@@ -119,7 +119,7 @@ const createPopupTemplate = ({
         </section>
       </div>
       <div class="film-details__bottom-container">
-        ${new CommentsView(comments).element}
+        
       </div>
     </form>
   </section>`);
@@ -128,9 +128,11 @@ const createPopupTemplate = ({
 export default class CardPopupView {
   #element = null;
   #card = null;
+  #comments = null;
 
   constructor(card) {
     this.#card = card;
+    this.#comments = card.comments;
   }
 
   get element() {
@@ -138,6 +140,8 @@ export default class CardPopupView {
       this.#element = createElement(this.template);
     }
 
+    this.#element.querySelector('.film-details__bottom-container').append(new CommentsView(this.#comments).element);
+    
     return this.#element;
   }
 
