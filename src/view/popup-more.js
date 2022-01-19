@@ -1,7 +1,8 @@
 import {formatDate} from '../utils';
-import {createCommentsTemplate} from './comments-view';
+import CommentsView from './comments-view';
+import {createElement} from '../render';
 
-export const createPopupTemplate = ({
+const createPopupTemplate = ({
   article,
   poster,
   description,
@@ -14,7 +15,6 @@ export const createPopupTemplate = ({
   screenwriters,
   duration,
   genre,
-  comments,
   isWatched,
   isWatchList,
   isFavourite
@@ -118,8 +118,38 @@ export const createPopupTemplate = ({
         </section>
       </div>
       <div class="film-details__bottom-container">
-        ${createCommentsTemplate(comments)}
+        
       </div>
     </form>
   </section>`);
 };
+
+export default class CardPopupView {
+  #element = null;
+  #card = null;
+  #comments = null;
+
+  constructor(card) {
+    this.#card = card;
+    this.#comments = card.comments;
+  }
+
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    this.#element.querySelector('.film-details__bottom-container').append(new CommentsView(this.#comments).element);
+
+    return this.#element;
+  }
+
+  get template() {
+    return createPopupTemplate(this.#card);
+  }
+
+  removeElement() {
+    this.#element = null;
+  }
+}
+

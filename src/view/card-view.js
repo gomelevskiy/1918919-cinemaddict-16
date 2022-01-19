@@ -1,7 +1,12 @@
 import {TEXT_CUT_LIMIT} from '../consts';
-import {textCropper, commentCountRules, generateYear} from '../utils';
+import {
+  textCropper,
+  commentCountRules,
+  generateYear
+} from '../utils';
+import {createElement} from '../render';
 
-export const createCardTemplate = ({
+const createCardTemplate = ({
   article,
   poster,
   description,
@@ -34,3 +39,28 @@ export const createCardTemplate = ({
 		</div>
 	</article>`
 );
+
+export default class CardView {
+  #element = null;
+  #card = null;
+
+  constructor(card) {
+    this.#card = card;
+  }
+
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
+    }
+
+    return this.#element;
+  }
+
+  get template() {
+    return createCardTemplate(this.#card);
+  }
+
+  removeElement() {
+    this.#element = null;
+  }
+}
