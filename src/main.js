@@ -37,7 +37,6 @@ const renderFilm = (filmListElement ,film) => {
     siteBodyElement.classList.add('hide-overflow');
     filmListElement.appendChild(filmPopupComponent.element, filmComponent.element);
   };
-  
   const closeFilmPopup = () => {
     siteBodyElement.classList.remove('hide-overflow');
     filmListElement.removeChild(filmPopupComponent.element, filmComponent.element);
@@ -52,7 +51,7 @@ const renderFilm = (filmListElement ,film) => {
   });
 
   render(filmListElement, filmComponent.element, RenderPosition.BEFORE_END);
-}
+};
 
 for (let item = 0; item < Math.min(FILMS.length, COUNT_CARD_PER_STEP); item++) {
   renderFilm(filmListContainer, FILMS[item]);

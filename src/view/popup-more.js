@@ -140,7 +140,7 @@ export default class CardPopupView {
     }
 
     this.#element.querySelector('.film-details__bottom-container').append(new CommentsView(this.#comments).element);
-    
+
     return this.#element;
   }
 

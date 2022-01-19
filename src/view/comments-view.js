@@ -1,4 +1,4 @@
-import {createElement} from "../render";
+import {createElement} from '../render';
 
 const createCommentsTemplate = (comments) => (
   `<section class="film-details__comments-wrap">
@@ -53,7 +53,7 @@ const createCommentsTemplate = (comments) => (
 export default class CommentsView {
   #element = null;
   #comments = [];
-  
+
   constructor(comments) {
     this.#comments = comments;
   }
