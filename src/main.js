@@ -42,12 +42,21 @@ const renderFilm = (filmListElement ,film) => {
     filmListElement.removeChild(filmPopupComponent.element, filmComponent.element);
   };
 
+  const onEscKeyDown = (evt) => {
+    if (evt.key === 'Escape' || evt.key === 'Esc') {
+      closeFilmPopup();
+      document.removeEventListener('keydown', onEscKeyDown);
+    }
+  };
+
   filmComponent.element.querySelector('.film-card__link').addEventListener('click', () => {
     openFilmPopup();
+    document.addEventListener('keydown', onEscKeyDown);
   });
 
   filmPopupComponent.element.querySelector('.film-details__close-btn').addEventListener('click', () => {
     closeFilmPopup();
+    document.removeEventListener('keydown', onEscKeyDown);
   });
 
   render(filmListElement, filmComponent.element, RenderPosition.BEFORE_END);
