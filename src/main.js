@@ -8,6 +8,7 @@ import CardView from './view/card-view';
 import SiteShowMoreTemplate from './view/show-more-view';
 import SiteStatisticsCountTemplate from './view/statistics-count-view';
 import CardPopupView from './view/popup-more';
+import SiteListEmptyTemplate from './view/list-empty-view';
 import generateFilm from './mocs/film';
 import {generateFilters} from './utils';
 
@@ -22,8 +23,13 @@ const filters = generateFilters(FILMS);
 
 render(siteMainElement, new SiteNavigationView(filters).element, RenderPosition.AFTER_BEGIN);
 render(siteHeaderElement, new SiteProfileTemplate().element, RenderPosition.BEFORE_END);
-render(siteMainElement, new SiteSortTemplate().element, RenderPosition.BEFORE_END);
-render(siteMainElement, new SiteListingTemplate().element, RenderPosition.BEFORE_END);
+
+if (FILMS.length === 0) {
+  render(siteMainElement, new SiteListEmptyTemplate().element, RenderPosition.BEFORE_END);
+}else {
+  render(siteMainElement, new SiteSortTemplate().element, RenderPosition.BEFORE_END);
+  render(siteMainElement, new SiteListingTemplate().element, RenderPosition.BEFORE_END);
+}
 
 const filmsElement = siteMainElement.querySelector('.films');
 const filmList = filmsElement.querySelector('.films-list');
